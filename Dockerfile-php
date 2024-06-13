@@ -1,0 +1,37 @@
+# Dockerfile for PHP-FPM
+FROM php:7.4-fpm
+
+# 必要なパッケージと拡張機能をインストール
+RUN apt-get update && apt-get install -y \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    unzip \
+    git \
+    curl && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-install gd
+
+# MongoDB PHP Extensionのインストール
+RUN pecl install mongodb && docker-php-ext-enable mongodb
+
+# Composerのインストール
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# 作業ディレクトリを設定
+WORKDIR /var/www/html
+
+# ソースコードとcomposer.jsonをコピー
+COPY src /var/www/html
+COPY composer.json /var/www/html/composer.json
+
+# 確認用のメッセージを追加
+RUN echo "composer.json ファイルが存在するか確認:"
+RUN ls -al /var/www/html
+RUN cat /var/www/html/composer.json || echo "composer.jsonが存在しません"
+
+# Composerを使って依存関係をインストール
+RUN composer install --no-interaction --working-dir=/var/www/html
+
+# ポートの公開
+EXPOSE 9000
