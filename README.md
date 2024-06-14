@@ -18,7 +18,7 @@ Dockerを使用してPHP-FPM、Nginx、およびMongoDBをセットアップし�
 
 まず、リポジトリをクローンします。
 githubが使えない場合はincircle.zipを使用してください。(どこかに置いておきます)
-基幹で使って良いのがあれば、pushします。
+システム側で使って良いのがあれば、pushします。
 
 ```sh
 git clone https://github.com/hogehoge/hogehoge-repo.git
