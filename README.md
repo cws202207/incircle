@@ -25,13 +25,13 @@ git clone https://github.com/hogehoge/hogehoge-repo.git
 cd hogehgoe-repo
 
 ```
-### 3. Docker Composeの起動
+### 2. Docker Composeの起動
 ```sh
 docker-compose up --build
 ```
 Docker Composeを使用してすべてのサービス（PHP-FPM、Nginx、MongoDB）を起動します。
 
-### 4. MongoDBユーザーの作成
+### 3. MongoDBユーザーの作成
 #### デフォルトは認証無しなので、本番で使用する際は、必要に応じて設定してください。
 MongoDBコンテナにアクセスし、管理者ユーザーを作成します。
 
@@ -50,7 +50,7 @@ db.createUser({
 })
 ```
 
-### 5. コンテナの確認と操作
+### 4. コンテナの確認と操作
 現在実行中のコンテナを一覧表示します。
 
 ```sh
@@ -71,7 +71,7 @@ docker-compose logs nginx
 docker exec -it your-repo_php-fpm_1 sh
 ```
 
-### 6. データベースの操作
+### 5. データベースの操作
 MongoDBシェルにアクセス
 MongoDBシェルにアクセスして、データベース操作を行います。
 
@@ -106,7 +106,7 @@ db.newcollection.insert({ name: "example", type: "test" })
 ```javascript
 db.newcollection.find()
 ```
-### 7. PHPスクリプトの確認
+### 6. PHPスクリプトの確認
 
 src/index.phpにアクセスして、PHPとMongoDBの情報を確認します。
 
